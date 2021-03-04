@@ -1,5 +1,6 @@
 // -----> Needed DOM element
 const imageContainer = document.querySelector(`#image__container`);
+const loader = document.querySelector(`#loader`);
 
 // -----> Global variables
 let photos = [];
@@ -19,7 +20,6 @@ const apiURL = `https://api.unsplash.com/photos/random/?count=${photoCount}&clie
 
 const xyz = () => {
     loadedPhotos++;
-    console.log(loadedPhotos);
 }
 
 // -----> This is a helper function, it'll help to set the attribute
@@ -51,10 +51,10 @@ const displayPhotos = () => {
         // -----> This event listener will trigger when the image element load
         image.addEventListener(`load`, () => {
             loadedPhotos++;
-            console.log(loadedPhotos)
             if (loadedPhotos === totalPhotos) {
                 ready = true;
                 loadedPhotos = 0;
+                loader.hidden = true;
             }
         });
 
@@ -81,7 +81,6 @@ window.addEventListener(`scroll`, () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 && ready === true) {
         ready = false;
         getPhotos();
-        console.log(`Times`);
     }
 });
 
